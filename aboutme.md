@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About me
+title: Malusi Mwongeli
 subtitle: Wannabe Redteamer | Published Writer | Literary Aficionado
 ---
 
