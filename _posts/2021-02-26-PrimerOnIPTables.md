@@ -1,3 +1,6 @@
+---
+---
+
 # A Primer on IPTables
 
 IPTables is essentially the built in command-line tool for managing Netfilter hooks which basically manages firewall rules. IPTables interacts with the netfilter framework to filter through packets. Every incoming or outgoing network packet traversing the networking system will trigger the hooks on netfilter allowing programs that register with these hooks to interact with the traffic and to check that the packets conform to the existing firewall rules.
