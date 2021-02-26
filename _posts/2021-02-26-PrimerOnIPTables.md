@@ -1,4 +1,11 @@
 ---
+layout: post
+title: A Comprehensive Primer on IPTables
+subtitle: Why does it look so complicated?
+cover-img: /assets/img/path.jpg
+thumbnail-img: /assets/img/thumb.png
+share-img: /assets/img/path.jpg
+tags: [iptables, netfilter, firewall]
 ---
 
 # A Primer on IPTables
@@ -33,6 +40,7 @@ IPTables are based on the netfilter modules i.e
 - the `iptable_filter` module becomes the ==Filter== table and thie table responsible for all the firewall functionality.
 - the `security_filter` module becomes the ==Security== table and thie table responsible for rules that manage access i.e Mandatory Access Controls(MAC) and Discretionary Access Controls(DAC) which are implemented by SELinux.
 
+
 ### Chains
 Each of the 5 tables has it's own predefined chains. Tables are deifned by general purpose, while chains determine when rules will be evaluates. Just like tables, chains mirror the names of the netfilter hoos they are associated with. These chain titles help describe the origin in the Netfilter stack. There are 5 chains.
 - the ==PREROUTING== chain is triggered by the `NF_IP_PRE_ROUTING` hook immediately upon packet reception.
@@ -58,11 +66,11 @@ Now that the `raw` table has 3 chains, how does a packet traverse that table int
 - Incoming packets destined to another host: **PREROUTING -> FORWARD -> POSTROUTING**
 - Locally generated packets: **OUTPUT -> POSTROUTING**
 
-Understanding how packets move through the IPtable will be especially imprtant when we look at how [[Docker and IPTables]] Docker and Kubernetes interact with IPTables. 
+Understanding how packets move through the IPtable will be especially imprtant when we look at how Docker and Kubernetes interact with IPTables. 
 
 This is a very high level breakdown of how a packet would traverse the IPTable if all the tables and chains were present. For an indepth graphical analysis, I'd recommend one on [Wikipedia](https://en.wikipedia.org/wiki/Netfilter#/media/File:Netfilter-packet-flow.svg).
 
-![[traversal.png]]
+![[traversal.png]](/assets/img/traversal.png)
 
 It can get really complicated to follow through with a packet but to see this in action, I'd advise to try out [this](https://rlworkman.net/howtos/iptables/chunkyhtml/x6002.html) script. 
 
@@ -105,8 +113,6 @@ nano flush-iptables.sh
 chmod +x flush-iptables.sh
 sudo ./flush-iptables.sh
 ```
-
-
 ### Rules
 Chains are a series of rules that define how the packets are handled. Rules are defines as a set of matches and a target. Rules are followed by order until a match is found. If a match is found it goes to the rules specified in the TARGET or executes the special values mentioned in the rule. If the criteria is not matched, it moves on to the next rule all through the chain. 
 
@@ -149,12 +155,14 @@ To edit a rule, the primary switches are -A which appends a new rule and -D whic
 
 1. Appending a rule
 Appending a rule add a rule to the end of the INPUT chain. Appending uses the -A switch.
+
 ```md
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 ```
 
 2. Deleting a rule
 To delete a rule, you must know its position on the chain. Deleting uses the -D switch.
+
 ```md
 iptables -D INPUT 1
 ```
@@ -162,13 +170,15 @@ This will delete the very first rule on the table.
 
 3. Inserting a rule
 You can create a rule at any position on the table using the insert switch. Inserting uses the -I switch.
+
 ```md
 iptables -I INPUT 4 -p tcp --dport 443 -j DROP
 ```
 This will insert it as the 4th rule on the INPUT chain.
 
 4. Replacing
-You can also replace rules in the chain using the -R switch. 
+You can also replace rules in the chain using the -R switch.
+
 ```md
 iptables -R INPUT 4 -p tcp -s 172.16.10.0/24 --dport 80 -j ACCEPT
 ```
@@ -177,17 +187,13 @@ This rule will replace the rule on the 4th line.
 5. Flushing the table.
 To clear the iptables rule, use the -F switch. If no chain is specified, then all chains are flushed.
 
-Resources:
+```md
+iptables -F
+```
+**Resources:**
 If you want to learn more about setting up a simple (or complex) firewall, I'd recommend the following sites.
 - [Digital Ocean](https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands)
 - [Digital Ocean, again](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04)
 - [CentOS Wiki](https://wiki.centos.org/HowTos/Network/IPTables)
 
 I hope this blog answer some of the questions you might have had!
-
-
-
-
-
-
-
