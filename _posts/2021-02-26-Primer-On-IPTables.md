@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Comprehensive Primer on IPTables
+title: Yet Another Primer on IPTables
 subtitle: Why does it look so complicated?
 cover-img: /assets/img/iptables.png
 thumbnail-img: ""
@@ -193,8 +193,8 @@ sudo service netfilter-persistent restart
 ```
 **Resources:**
 If you want to learn more about setting up a simple (or complex) firewall, I'd recommend the following sites.
-- [Digital Ocean](https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands)
-- [Digital Ocean, again](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04)
-- [CentOS Wiki](https://wiki.centos.org/HowTos/Network/IPTables)
+- [Iptables Essentials: Common Firewall Rules and Commands](https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands)
+- [How To Set Up a Firewall Using Iptables on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04)
+- [IPTables](https://wiki.centos.org/HowTos/Network/IPTables)
 
 I hope this blog answer some of the questions you might have had!
