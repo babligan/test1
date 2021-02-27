@@ -152,13 +152,11 @@ A default installation of IPTables should have the INPUT, OUTPUT and FORWARD cha
 
 To edit a rule, the primary switches are -A which appends a new rule and -D which deletes a rule. You can also replace a rule using -R. To get more switches use the manpages.
 
-1. Appending a rule
-Appending a rule add a rule to the end of the INPUT chain. Appending uses the -A switch.
+Appending adds a rule to the end of the INPUT chain and uses the -A switch.
 
 ```md
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 ```
-2. Deleting a rule
 To delete a rule, you must know its position on the chain. Deleting uses the -D switch.
 
 ```md
@@ -166,7 +164,6 @@ iptables -D INPUT 1
 ```
 This will delete the very first rule on the table.
 
-3. Inserting a rule
 You can create a rule at any position on the table using the insert switch. Inserting uses the -I switch.
 
 ```md
@@ -174,7 +171,6 @@ iptables -I INPUT 4 -p tcp --dport 443 -j DROP
 ```
 This will insert it as the 4th rule on the INPUT chain.
 
-4. Replacing
 You can also replace rules in the chain using the -R switch.
 
 ```md
@@ -182,11 +178,18 @@ iptables -R INPUT 4 -p tcp -s 172.16.10.0/24 --dport 80 -j ACCEPT
 ```
 This rule will replace the rule on the 4th line.
 
-5. Flushing the table.
-To clear the iptables rule, use the -F switch. If no chain is specified, then all chains are flushed.
+To clear the iptables, use the -F switch. If no chain is specified, then all chains are flushed. Be cautious when flushing the table. If for example the INPUT policy is DROP or REJECT and the rules are flushed, all incoming traffic will be dropped or rejected and network communication broken. So before you flush your ruleset, ensure your INPUT chain has an ACCEPT policy.
 
 ```md
 iptables -F
+```
+By default, the rulls added to the iptables are ephemeral, which meeans that everytime you reboot, your rules are gone. We need to install the nefilter-package to save our rules and make them persistent even after reboots.
+```md
+sudo apt-get update
+sudo apt install netfilter-persistent -y
+#To save your configurations
+sudo service netfilter-persistent save
+sudo service netfilter-persistent restart
 ```
 **Resources:**
 If you want to learn more about setting up a simple (or complex) firewall, I'd recommend the following sites.
