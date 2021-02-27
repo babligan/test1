@@ -2,9 +2,9 @@
 layout: post
 title: A Comprehensive Primer on IPTables
 subtitle: Why does it look so complicated?
-cover-img: /assets/img/path.jpg
-thumbnail-img: /assets/img/thumb.png
-share-img: /assets/img/path.jpg
+cover-img: /assets/img/iptables.png
+thumbnail-img: ""
+share-img: ""
 tags: [iptables, netfilter, firewall]
 ---
 
