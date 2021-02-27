@@ -32,20 +32,20 @@ With IPTables, multiple TABLES can be defined. Each table contains various chain
 IPTables provides 5 key tables each representing a distinct set of rules, organized by area of concern, for evaluating packets. For example, if a rule deals with packet filtering, it will be put into the filter table. If it deals with packet manipulation, it will belong to the Mangle table. Any table can call itself and it also can execute its own rules, which enables possibilities for additional processing and iteration.
 
 IPTables are based on the netfilter modules i.e
-- the `iptable_raw` module which then becomes the ==Raw== table is responsible for filtering packets before they reach more memory demanding operations.
-- the `iptable_mangle` module becomes the ==Mangle== table is responsible for modifying the packet by altering the IP headers.
-- the `iptable_nat` module becomes the ==Nat== table. It registers 2 hooks, the DNAT (Destination NAT) which transforms the packet before it's pushed to the filter hook and the SNAT (Source NAT) which modifies the packet after it's been through the filter hook. The NAT table fucntions as a configuration database and no packet filtering occurs.
-- the `iptable_filter` module becomes the ==Filter== table and thie table responsible for all the firewall functionality.
-- the `security_filter` module becomes the ==Security== table and thie table responsible for rules that manage access i.e Mandatory Access Controls(MAC) and Discretionary Access Controls(DAC) which are implemented by SELinux.
+- the `iptable_raw` module which then becomes the Raw table is responsible for filtering packets before they reach more memory demanding operations.
+- the `iptable_mangle` module becomes the Mangle table is responsible for modifying the packet by altering the IP headers.
+- the `iptable_nat` module becomes the Nat table. It registers 2 hooks, the DNAT (Destination NAT) which transforms the packet before it's pushed to the filter hook and the SNAT (Source NAT) which modifies the packet after it's been through the filter hook. The NAT table fucntions as a configuration database and no packet filtering occurs.
+- the `iptable_filter` module becomes the Filter table and thie table responsible for all the firewall functionality.
+- the `security_filter` module becomes the Security table and thie table responsible for rules that manage access i.e Mandatory Access Controls(MAC) and Discretionary Access Controls(DAC) which are implemented by SELinux.
 
 
 ### Chains
 Each of the 5 tables has it's own predefined chains. Tables are deifned by general purpose, while chains determine when rules will be evaluates. Just like tables, chains mirror the names of the netfilter hoos they are associated with. These chain titles help describe the origin in the Netfilter stack. There are 5 chains.
-- the ==PREROUTING== chain is triggered by the `NF_IP_PRE_ROUTING` hook immediately upon packet reception.
-- the ==INPUT== chain is triggered by the `NF_IP_LOCAL_IN` hook once the packet is moved to a local process.
-- the ==FORWARD== chain is triggered by the `NF_IP_FORWARD` hook once the packet forwarded through another interface.
-- the ==OUTPUT== chain is triggered by the `NF_IP_LOCAL_OUT` hook once the packet is locally created.
-- the ==POSTROUTING== chain is triggered by the `NF_IP_POST_ROUTING` hook once a packet is meant to be sent out.
+- the PREROUTING chain is triggered by the `NF_IP_PRE_ROUTING` hook immediately upon packet reception.
+- the INPUT chain is triggered by the `NF_IP_LOCAL_IN` hook once the packet is moved to a local process.
+- the FORWARD chain is triggered by the `NF_IP_FORWARD` hook once the packet forwarded through another interface.
+- the OUTPUT chain is triggered by the `NF_IP_LOCAL_OUT` hook once the packet is locally created.
+- the POSTROUTING chain is triggered by the `NF_IP_POST_ROUTING` hook once a packet is meant to be sent out.
 
 Each table has it's own chains. The table below shows how the 5 chains are distributed in the 5 tables. The NAT table has been split into two becasue it processes packets before and after they pass through the filter table.
 
