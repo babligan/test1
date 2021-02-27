@@ -111,6 +111,7 @@ nano flush-iptables.sh
 chmod +x flush-iptables.sh
 sudo ./flush-iptables.sh
 ```
+
 ### Rules
 Chains are a series of rules that define how the packets are handled. Rules are defines as a set of matches and a target. Rules are followed by order until a match is found. If a match is found it goes to the rules specified in the TARGET or executes the special values mentioned in the rule. If the criteria is not matched, it moves on to the next rule all through the chain. 
 
@@ -157,7 +158,6 @@ Appending a rule add a rule to the end of the INPUT chain. Appending uses the -A
 ```md
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 ```
-
 2. Deleting a rule
 To delete a rule, you must know its position on the chain. Deleting uses the -D switch.
 
