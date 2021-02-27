@@ -8,8 +8,6 @@ share-img: /assets/img/path.jpg
 tags: [iptables, netfilter, firewall]
 ---
 
-# A Primer on IPTables
-
 IPTables is essentially the built in command-line tool for managing Netfilter hooks which basically manages firewall rules. IPTables interacts with the netfilter framework to filter through packets. Every incoming or outgoing network packet traversing the networking system will trigger the hooks on netfilter allowing programs that register with these hooks to interact with the traffic and to check that the packets conform to the existing firewall rules.
 
 IPTables isn't the only tool available for interacting with the netfilter framework. UFW (Uncomplcated firewall), firewalld and nftables can all interact with the netfilter framework to provide firewall functionality.
@@ -101,7 +99,7 @@ sudo tail -n 0 -f /var/log/syslog
 ```
 
 In the end you should have something like this:
-![[packet-traversal.png]]
+![[packet-traversal.png]](/assets/img/packet-traversal.png)
 
 Using the flowchart, try and figure out what's going on. Remember that a ping consists of an echo-request and an echo-reply. 
 
@@ -149,7 +147,7 @@ cat /etc/iptables/rules.v4
 
 A default installation of IPTables should have the INPUT, OUTPUT and FORWARD chains set to ACCEPT and no other rules present. 
 
-![[default-ruleset.png]]
+![[default-ruleset.png]](/assets/img/default-ruleset.png)
 
 To edit a rule, the primary switches are -A which appends a new rule and -D which deletes a rule. You can also replace a rule using -R. To get more switches use the manpages.
 
